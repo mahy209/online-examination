@@ -23,8 +23,8 @@
 
 <!--header start-->
 <div class="row header">
-<div class="col-lg-6">
-<span class="logo">EXAMIA for testing your skills</span></div>
+<div class="col-lg-6" style="padding: 14px 16px;">
+<span class="logo">EXAMIA</span></div>
 <div class="col-md-2">
 </div>
 <div class="col-md-4">
@@ -38,7 +38,7 @@ else
 echo '<a href="logout.php?q=feedback.php" class="pull-right sub1 btn title3"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Signout</a>&nbsp;';}
 ?>
 
-<a href="index.php" class="pull-right btn sub1 title3"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>&nbsp;
+<a href="index.php" class="pull-right btn sub1 title3" style="color:#022534;"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>&nbsp;
 </div></div>
 
 <!--sign in modal start-->
@@ -47,7 +47,7 @@ echo '<a href="logout.php?q=feedback.php" class="pull-right sub1 btn title3"><sp
     <div class="modal-content title1">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title title1"><span style="color:orange">Log In</span></h4>
+        <h4 class="modal-title title1"><span style="color:#1791b1">Log In</span></h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" action="login.php?q=index.php" method="POST">
@@ -89,7 +89,7 @@ echo '<a href="logout.php?q=feedback.php" class="pull-right sub1 btn title3"><sp
 <div class="bg1">
 <div class="row">
 <div class="col-md-3"></div>
-<div class="col-md-6 panel" style="background-image:url(image/bgw.jpg); min-height:430px;">
+<div class="col-md-6 panel" style="background-color:#fffffff; min-height:430px;width: 700px;opacity: 0.9;filter: alpha(opacity=60);">
 <h2 align="center" style="font-family:'typo'; color:#000066">FEEDBACK/REPORT A PROBLEM</h2>
 <div style="font-size:14px">
 <?php if(@$_GET['q'])echo '<span style="font-size:18px;"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;'.@$_GET['q'].'</span>';
@@ -157,20 +157,18 @@ You can send us your feedback through e-mail on the following e-mail id:<br />
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" style="font-family:'typo' "><span style="color:orange">Developers</span></h4>
+        <h4 class="modal-title" style="font-family:'typo' "><span style="color:#1791b1;">Developers</span></h4>
       </div>
 	  
       <div class="modal-body">
         <p>
 		<div class="row">
 		<div class="col-md-4">
-		 <img src="image/CAM00121.jpg" width=100 height=100 alt="Sunny Prakash Tiwari" class="img-rounded">
+		 <img src="image/kfs.png" width=100 height=100 alt="KFU" class="img-rounded">
 		 </div>
-		 <div class="col-md-5">
-		<a href="http://yugeshverma.blogspot.in" style="color:#202020; font-family:'typo' ; font-size:18px" title="Find on Facebook">Yugesh Verma</a>
-		<h4 style="color:#202020; font-family:'typo' ;font-size:16px" class="title1">+91 9165063741</h4>
-		<h4 style="font-family:'typo' ">vermayugesh323@gmail.com</h4>
-		<h4 style="font-family:'typo' ">Chhattishgarh insitute of management & Technology ,bhilai</h4></div></div>
+		 <div class="col-md-5" style="position: center;">
+		<a href="https://github.com/mahy209/online-examination" style="color:#202020; font-family:'typo' ; font-size:18px" title="Find on Facebook">online examination system</a>
+		<h4 style="font-family:'typo' ">computer and information technology kfs university, se department</h4></div></div>
 		</p>
       </div>
     
@@ -184,7 +182,7 @@ You can send us your feedback through e-mail on the following e-mail id:<br />
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title"><span style="color:orange;font-family:'typo' ">LOGIN</span></h4>
+        <h4 class="modal-title"><span style="color:#1791b1;font-family:'typo' ">LOGIN</span></h4>
       </div>
       <div class="modal-body title1">
 <div class="row">
@@ -198,7 +196,7 @@ You can send us your feedback through e-mail on the following e-mail id:<br />
 <input type="password" name="password" maxlength="15" placeholder="Password" class="form-control"/>
 </div>
 <div class="form-group" align="center">
-<input type="submit" name="login" value="Login" class="btn btn-primary" />
+<input type="submit" name="login" value="Login" class="btn btn-primary"/>
 </div>
 </form>
 </div><div class="col-md-3"></div></div>
