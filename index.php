@@ -31,7 +31,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 <div class="col-lg-6" style="padding: 14px 16px;">
 <span class="logo">EXAMIA</span></div>
 <div class="col-md-2 col-md-offset-4">
-<a href="#" class="pull-right btn sub1" data-toggle="modal" data-target="#myModal" style="color:#022534;"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Sign In</b></span></a></div>
+<a href="#" class="pull-right btn sub1" data-toggle="modal" data-target="#myModal" style="color:white;"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;<span class="title1" style="color:white;"><b>Sign In</b></span></a></div>
 <!--sign in modal start-->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
@@ -83,7 +83,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 <div class="row">
 
 <div class="col-md-7"></div>
-<div class="col-md-4 panel" style="background-color:#ffffff;width:450px;opacity: 0.9;filter: alpha(opacity=60);">
+<div class="col-md-4 panel" style="background-color:#ffffff;width:450px;opacity: 0.95;filter: alpha(opacity=60);">
 <!-- sign in form begins --> 
   <form class="form-horizontal" name="form" action="sign.php?q=account.php" onSubmit="return validateForm()" method="POST">
 <fieldset>

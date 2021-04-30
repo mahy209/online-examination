@@ -82,7 +82,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
             <li><a href="dash.php?q=5">Remove Quiz</a></li>
 			
           </ul>
-        </li><li class="pull-right"> <a href="logout.php?q=account.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Signout</a></li>
+        </li><li class="pull-right"> <a href="logout.php?q=account.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Sign out</a></li>
 		
       </ul>
           </div><!-- /.navbar-collapse -->
@@ -110,7 +110,7 @@ $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$e
 $rowcount=mysqli_num_rows($q12);	
 if($rowcount == 0){
 	echo '<tr><td>'.$c++.'</td><td>'.$title.'</td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="account.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:#1791b1"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td></tr>';
+	<td><b><a href="account.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:#1791b1"><span class="glyphicon glyphicon-new-window" aria-hidden="true" style="color:white;"></span>&nbsp;<span class="title1" style="color:white;"><b>Start</b></span></a></b></td></tr>';
 }
 else
 {

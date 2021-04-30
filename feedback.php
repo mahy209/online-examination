@@ -32,13 +32,13 @@
  include_once 'dbConnection.php';
 session_start();
   if((!isset($_SESSION['email']))){
-echo '<a href="#" class="pull-right sub1 btn title3" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign In</a>&nbsp;';}
+echo '<a href="#" class="pull-right sub1 btn title3" data-toggle="modal" data-target="#myModal" style="color:white;"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign In</a>&nbsp;';}
 else
 {
 echo '<a href="logout.php?q=feedback.php" class="pull-right sub1 btn title3"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Signout</a>&nbsp;';}
 ?>
 
-<a href="index.php" class="pull-right btn sub1 title3" style="color:#022534;"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>&nbsp;
+<a href="index.php" class="pull-right btn sub1 title3" style="color:white;"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>&nbsp;
 </div></div>
 
 <!--sign in modal start-->
@@ -89,7 +89,7 @@ echo '<a href="logout.php?q=feedback.php" class="pull-right sub1 btn title3"><sp
 <div class="bg1">
 <div class="row">
 <div class="col-md-3"></div>
-<div class="col-md-6 panel" style="background-color:#fffffff; min-height:430px;width: 700px;opacity: 0.9;filter: alpha(opacity=60);">
+<div class="col-md-6 panel" style="background-color:#fffffff; min-height:430px;width: 700px;opacity: 0.95;filter: alpha(opacity=60);">
 <h2 align="center" style="font-family:'typo'; color:#000066">FEEDBACK/REPORT A PROBLEM</h2>
 <div style="font-size:14px">
 <?php if(@$_GET['q'])echo '<span style="font-size:18px;"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;'.@$_GET['q'].'</span>';
