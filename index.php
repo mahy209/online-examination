@@ -81,8 +81,9 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 
 <div class="bg1">
 <div class="row">
-
-<div class="col-md-7"></div>
+<div class="col-md-7">
+<h1 style="padding: 150px 30px;color:white;float:left;font-size:75px"> Knowledge is power. Test it. </h1> </div>
+<div class="col-md-5"></div>
 <div class="col-md-4 panel" style="background-color:#ffffff;width:450px;opacity: 0.95;filter: alpha(opacity=60);">
 <!-- sign in form begins --> 
   <form class="form-horizontal" name="form" action="sign.php?q=account.php" onSubmit="return validateForm()" method="POST">
