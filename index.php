@@ -99,23 +99,44 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
   </div>
 </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="gender"></label>
-  <div class="col-md-12">
-    <select id="gender" name="gender" placeholder="Enter your gender" class="form-control input-md" >
-   <option value="Male">Select Gender</option>
-  <option value="M">Male</option>
-  <option value="F">Female</option> </select>
-  </div>
-</div>
 
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-12 control-label" for="name"></label>  
   <div class="col-md-12">
-  <input id="college" name="college" placeholder="Enter your college name" class="form-control input-md" type="text">
+  <input id="faculty" name="faculty" placeholder="Enter your faculty name" class="form-control input-md" type="text">
     
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="level"></label>
+  <div class="col-md-12">
+    <select id="level" name="level" placeholder="Enter your level" class="form-control input-md" >
+   <option >Select level</option>
+  <option value="1">level 1</option>
+  <option value="2">level 2</option>
+  <option value="3">level 3</option>
+  <option value="4">level 4</option>
+  </select>
+
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="dep"></label>
+  <div class="col-md-12">
+    <select id="dep" name="dep" placeholder="Enter your Department" class="form-control input-md" >
+   <option >Select Department</option>
+  <option value="cs">cs</option>
+  <option value="se">se</option> 
+  <option value="it">it</option>
+  <option value="is">is</option>
+  </select>
   </div>
 </div>
 
@@ -124,19 +145,12 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 <div class="form-group">
   <label class="col-md-12 control-label title1" for="email"></label>
   <div class="col-md-12">
-    <input id="email" name="email" placeholder="Enter your email-id" class="form-control input-md" type="email">
+    <input id="email" name="email" placeholder="Enter your email" class="form-control input-md" type="email">
     
   </div>
 </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="mob"></label>  
-  <div class="col-md-12">
-  <input id="mob" name="mob" placeholder="Enter your mobile number" class="form-control input-md" type="number">
-    
-  </div>
-</div>
+
 
 
 <!-- Text input-->
@@ -161,7 +175,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 <div class="form-group">
   <label class="col-md-12 control-label" for=""></label>
   <div class="col-md-12"> 
-    <input  type="submit" class="sub" value="sign up" class="btn btn-primary"/>
+    <input  type="submit" name="submit" class="sub" value="sign up" class="btn btn-primary"/>
   </div>
 </div>
 

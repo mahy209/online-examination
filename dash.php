@@ -97,30 +97,31 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
 <?php if(@$_GET['q']==0) {
 
 $result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
-echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
+echo  '<div class="panel"><div class="table-responsive">
+<table class="table table-striped title1">
 <tr><td><b>S.N.</b></td><td><b>Topic</b></td><td><b>Total question</b></td><td><b>Marks</b></td><td><b>Time limit</b></td><td></td></tr>';
 $c=1;
 while($row = mysqli_fetch_array($result)) {
+  $eid= $row['eid'];
 	$title = $row['title'];
 	$total = $row['total'];
 	$sahi = $row['sahi'];
-    $time = $row['time'];
+  $time = $row['time'];
 	$eid = $row['eid'];
 $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
 $rowcount=mysqli_num_rows($q12);	
-if($rowcount == 0){
+
 	echo '<tr><td>'.$c++.'</td><td>'.$title.'</td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="account.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:#1791b1"><span class="glyphicon glyphicon-new-window" aria-hidden="true" style="color:white;"></span>&nbsp;<span class="title1" style="color:white;"><b>Start</b></span></a></b></td></tr>';
-}
-else
-{
-echo '<tr style="color:#1791b1"><td>'.$c++.'</td><td>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Restart</b></span></a></b></td></tr>';
-}
+  .<td><a href="dash.php?delete='.$eid.'"class="pull-right btn sub1" style="margin:0px;background:#1791b1><span class="glyphicon glyphicon-new-window" aria-hidden="true" style="color:white;"></span>"</span>&nbsp;<span class="title1" style="color:white;"><i class="bi bi-trash"></i>Delete</a></td></tr>';
 }
 $c=0;
 echo '</table></div></div>';
 
+}
+if(isset($_GET['delete'])){
+  $id=$_GET['delete'];
+
+  $q=mysqli_query($con,"DELETE FROM `quiz` where eid = $id " );
 }
 
 //ranking start
@@ -139,11 +140,11 @@ $q12=mysqli_query($con,"SELECT * FROM user WHERE email='$e' " )or die('Error231'
 while($row=mysqli_fetch_array($q12) )
 {
 $name=$row['name'];
-$gender=$row['gender'];
-$college=$row['college'];
+$dep=$row['dep'];
+$level=$row['level'];
 }
 $c++;
-echo '<tr><td style="color:#1791b1"><b>'.$c.'</b></td><td>'.$name.'</td><td>'.$gender.'</td><td>'.$college.'</td><td>'.$s.'</td><td>';
+echo '<tr><td style="color:#1791b1"><b>'.$c.'</b></td><td>'.$name.'</td><td>'.$dep.'</td><td>'.$level.'</td><td>'.$s.'</td><td>';
 }
 echo '</table></div></div>';}
 
@@ -156,16 +157,15 @@ echo '</table></div></div>';}
 
 $result = mysqli_query($con,"SELECT * FROM user") or die('Error');
 echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-<tr><td><b>S.N.</b></td><td><b>Name</b></td><td><b>Gender</b></td><td><b>College</b></td><td><b>Email</b></td><td><b>Mobile</b></td><td></td></tr>';
+<tr><td><b>S.N.</b></td><td><b>Name</b></td><td><b>department</b></td><td><b>level</b></td><td><b>Email</b></td><td></td></tr>';
 $c=1;
 while($row = mysqli_fetch_array($result)) {
 	$name = $row['name'];
-	$mob = $row['mob'];
-	$gender = $row['gender'];
-    $email = $row['email'];
-	$college = $row['college'];
+	$dep = $row['dep'];
+  $email = $row['email'];
+	$level = $row['level'];
 
-	echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$gender.'</td><td>'.$college.'</td><td>'.$email.'</td><td>'.$mob.'</td>
+	echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$dep.'</td><td>'.$level.'</td><td>'.$email.'</td>
 	<td><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td></tr>';
 }
 $c=0;
@@ -233,7 +233,7 @@ echo '
 <div class="form-group">
   <label class="col-md-12 control-label" for="name"></label>  
   <div class="col-md-12">
-  <input id="name" name="name" placeholder="Enter Quiz title" class="form-control input-md" type="text">
+  <input id="title" name="title" placeholder="Enter Quiz title" class="form-control input-md" type="text">
     
   </div>
 </div>
@@ -244,7 +244,7 @@ echo '
 <div class="form-group">
   <label class="col-md-12 control-label" for="total"></label>  
   <div class="col-md-12">
-  <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number">
+  <input id="num_q" name="num_q" placeholder="Enter total number of questions" class="form-control input-md" type="number">
     
   </div>
 </div>
@@ -253,7 +253,7 @@ echo '
 <div class="form-group">
   <label class="col-md-12 control-label" for="right"></label>  
   <div class="col-md-12">
-  <input id="right" name="right" placeholder="Enter marks on right answer" class="form-control input-md" min="0" type="number">
+  <input id="right_answer" name="right_answer" placeholder="Enter marks on right answer" class="form-control input-md" min="0" type="number">
     
   </div>
 </div>
@@ -290,21 +290,20 @@ echo '
 <div class="form-group">
   <label class="col-md-12 control-label" for="desc"></label>  
   <div class="col-md-12">
-  <textarea rows="8" cols="8" name="desc" class="form-control" placeholder="Write description here..."></textarea>  
+  <textarea rows="8" cols="8" name="des" class="form-control" placeholder="Write description here..."></textarea>  
   </div>
 </div>
 
 
 <div class="form-group">
-  <label class="col-md-12 control-label" for=""></label>
+  <label class="col-md-12 control-labe"l" for=""></label>
   <div class="col-md-12"> 
-    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+    <input  type="submit" name="addquiz" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
   </div>
 </div>
 
 </fieldset>
 </form></div>';
-
 
 
 }
@@ -375,7 +374,7 @@ echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
 echo '<div class="form-group">
   <label class="col-md-12 control-label" for=""></label>
   <div class="col-md-12"> 
-    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+    <input  type="submit"name="addqns" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
   </div>
 </div>
 

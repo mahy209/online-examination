@@ -60,7 +60,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><b>Netcamp</b></a>
+      <a class="navbar-brand" href="#"><b>EXAMIA</b></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -106,8 +106,9 @@ if($rowcount == 0){
 else
 {
 echo '<tr style="color:#1791b1"><td>'.$c++.'</td><td>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Restart</b></span></a></b></td></tr>';
+	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'" </a></b></td></tr>';
 }
+
 }
 $c=0;
 echo '</table></div></div>';
@@ -225,21 +226,15 @@ if(@$_GET['q']== 3)
 $q=mysqli_query($con,"SELECT * FROM rank  ORDER BY score DESC " )or die('Error223');
 echo  '<div class="panel title"><div class="table-responsive">
 <table class="table table-striped title1" >
-<tr style="color:red"><td><b>Rank</b></td><td><b>Name</b></td><td><b>Gender</b></td><td><b>College</b></td><td><b>Score</b></td></tr>';
+<tr style="color:red"><td><b>Rank</b></td><td><b>email</b></td><td><b>Score</b></td></tr>';
 $c=0;
 while($row=mysqli_fetch_array($q) )
 {
 $e=$row['email'];
 $s=$row['score'];
-$q12=mysqli_query($con,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
-while($row=mysqli_fetch_array($q12) )
-{
-$name=$row['name'];
-$gender=$row['gender'];
-$college=$row['college'];
-}
+
 $c++;
-echo '<tr><td style="color:#1791b1"><b>'.$c.'</b></td><td>'.$name.'</td><td>'.$gender.'</td><td>'.$college.'</td><td>'.$s.'</td><td>';
+echo '<tr><td style="color:#1791b1"><b>'.$c.'</b></td><td>'.$email.'</td><td>'.$s.'</td><td>';
 }
 echo '</table></div></div>';}
 ?>
