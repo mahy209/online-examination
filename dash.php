@@ -75,13 +75,8 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
         <li <?php if(@$_GET['q']==1) echo'class="active"'; ?>><a href="dash.php?q=1">User</a></li>
 		<li <?php if(@$_GET['q']==2) echo'class="active"'; ?>><a href="dash.php?q=2">Ranking</a></li>
 		<li <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a href="dash.php?q=3">Feedback</a></li>
-        <li class="dropdown <?php if(@$_GET['q']==4 || @$_GET['q']==5) echo'active"'; ?>">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quiz<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="dash.php?q=4">Add Quiz</a></li>
-            <li><a href="dash.php?q=5">Remove Quiz</a></li>
-			
-          </ul>
+    <li><a href="dash.php?q=4">Add Quiz</a></li>
+		
         </li><li class="pull-right"> <a href="logout.php?q=account.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Sign out</a></li>
 		
       </ul>
@@ -294,20 +289,48 @@ echo '
   </div>
 </div>
 
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+<h2>Set New Timer</h2>
+<form action="" method="post">
+<div class="col-sm-3">
+                <label for="minute" >Minutes</label>
+                <input type="digit" class="form-control input-group-lg reg_name" name="min" placeholder="Min" Required>
+			</div>
+<div class="col-sm-3">
+                <label for="second" >Seconds</label>
+                <input type="digit" class="form-control input-group-lg reg_name" name="sec" placeholder="Sec" Required>
+            </div><br>
+
+<form>
+</div></div>
+
 
 <div class="form-group">
   <label class="col-md-12 control-labe"l" for=""></label>
   <div class="col-md-12"> 
-    <input  type="submit" name="addquiz" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+    <input  type="submit" name="addquiz" style="margin-left:45%" class="btn btn-primary btn-lg" value="Submit" class="btn btn-primary"/>
   </div>
 </div>
 
 </fieldset>
 </form></div>';
-
-
 }
 ?>
+<?php
+if(isset($_POST['addquiz'])){
+@$min = $_POST['min'];
+@$sec = $_POST['sec'];
+$timer = $min.':'.$sec;
+$fetchqry3 = "UPDATE `quiz` SET `time`='$timer' WHERE`id`=1";
+$result3 = mysqli_query($con,$fetchqry3);
+if($result3==TRUE){
+	echo "The timer currently set to $timer";
+}
+}
+?>
+
+
 <!--add quiz end-->
 
 <!--add quiz step2 start-->
@@ -374,39 +397,35 @@ echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
 echo '<div class="form-group">
   <label class="col-md-12 control-label" for=""></label>
   <div class="col-md-12"> 
-    <input  type="submit"name="addqns" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+    <input  type="submit" name="addqns" style="margin-left:45%" class="btn btn-primary btn-lg" value="Submit" class="btn btn-primary"/>
   </div>
 </div>
 
 </fieldset>
 </form></div>';
-
-
-
-}
-?><!--add quiz step 2 end-->
-
-<!--remove quiz-->
-<?php if(@$_GET['q']==5) {
-
-$result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
-echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-<tr><td><b>S.N.</b></td><td><b>Topic</b></td><td><b>Total question</b></td><td><b>Marks</b></td><td><b>Time limit</b></td><td></td></tr>';
-$c=1;
-while($row = mysqli_fetch_array($result)) {
-	$title = $row['title'];
-	$total = $row['total'];
-	$sahi = $row['sahi'];
-    $time = $row['time'];
-	$eid = $row['eid'];
-	echo '<tr><td>'.$c++.'</td><td>'.$title.'</td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="update.php?q=rmquiz&eid='.$eid.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Remove</b></span></a></b></td></tr>';
-}
-$c=0;
-echo '</table></div></div>';
-
 }
 ?>
+ <?php if(isset($_POST['addqns'])){
+$fetchqry = "SELECT * FROM `quiz`";
+$result=mysqli_query($con,$fetchqry);
+$num=mysqli_num_rows($result);
+@$eid = $_POST['eid'];
+@$title = $_POST['title'];
+@$sahi = $_POST['sahi'];
+@$wrong = $_POST['wrong'];
+@$total = $_POST['total'];
+@$time = $_POST['time']; 
+@$intro = $_POST['intro']; 
+@$tag = $_POST['tag']; 
+@$date = $_POST['date']; 
+$qry = "INSERT INTO `quiz`(`eid`, `title`, `sahi`, `wrong`, `total`, `time`, `intro`, `tag`, `date`)VALUES ($eid,'$title','$sahi','$wrong','$total','$time','$intro','$tag','$date')";
+$done = mysqli_query($con,$qry);
+if($done==TRUE){
+	echo "Question and Answers Sumbmitted Succesfully";
+}
+	 }
+?>
+<!--add quiz step 2 end-->
 
 
 </div><!--container closed-->
