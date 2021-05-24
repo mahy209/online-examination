@@ -120,6 +120,7 @@ var seconds = 60;
     function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
+    document.getElementById('submit-btn').style.display = "none";
     if (remainingSeconds < 10) {
         remainingSeconds = "0" + remainingSeconds; 
     }
@@ -127,6 +128,7 @@ var seconds = 60;
     if (seconds == 0) {
       clearInterval(countdownTimer);
       document.getElementById('submit-btn').click();
+      
     } else {    
         seconds--;
     }
