@@ -114,22 +114,25 @@ $c=0;
 echo '</table></div></div>';
 
 }?>
+
 <span id="countdown" class="timer" style="display: grid;text-align:center;font-size: 50px;margin-top: 0px;color:#1791b1;"></span>
 <script>
+
 var seconds = 60;
     function secondPassed() {
     var minutes = Math.round((seconds - 30)/60);
     var remainingSeconds = seconds % 60;
-    document.getElementById('submit-btn').style.display = "none";
     if (remainingSeconds < 10) {
         remainingSeconds = "0" + remainingSeconds; 
     }
+    if(document.getElementById('submit-btn').style.display !== "none"){
     document.getElementById('countdown').innerHTML = minutes + ":" +    remainingSeconds;
+    }
     if (seconds == 0) {
       clearInterval(countdownTimer);
       document.getElementById('submit-btn').click();
       
-    } else {    
+    } else {
         seconds--;
     }
     }

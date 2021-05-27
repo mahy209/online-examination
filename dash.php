@@ -92,8 +92,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
 <?php if(@$_GET['q']==0) {
 
 $result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
-echo  '<div class="panel"><div class="table-responsive">
-<table class="table table-striped title1">
+echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
 <tr><td><b>S.N.</b></td><td><b>Topic</b></td><td><b>Total question</b></td><td><b>Marks</b></td><td><b>Time limit</b></td><td></td></tr>';
 $c=1;
 while($row = mysqli_fetch_array($result)) {
@@ -116,7 +115,7 @@ echo '</table></div></div>';
 if(isset($_GET['delete'])){
   $id=$_GET['delete'];
 
-  $q=mysqli_query($con,"DELETE FROM `quiz` where eid = $id " );
+  $q=mysqli_query($con,"DELETE FROM `quiz` WHERE  eid ='$id' " );
 }
 
 //ranking start
@@ -217,86 +216,86 @@ echo '<div class="panel"<a title="Back to Archive" href="update.php?q1=2"><b><sp
 <!--add quiz start-->
 <?php
 if(@$_GET['q']==4 && !(@$_GET['step']) ) {
-echo ' 
-<div class="row">
-<span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Quiz Details</b></span><br /><br />
- <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="update.php?q=addquiz"  method="POST">
-<fieldset>
-
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="name"></label>  
-  <div class="col-md-12">
-  <input id="title" name="title" placeholder="Enter Quiz title" class="form-control input-md" type="text">
-    
+  echo ' 
+  <div class="row">
+  <span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Quiz Details</b></span><br /><br />
+   <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="update.php?q=addquiz"  method="POST">
+  <fieldset>
+  
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-12 control-label" for="name"></label>  
+    <div class="col-md-12">
+    <input id="name" name="name" placeholder="Enter Quiz title" class="form-control input-md" type="text">
+      
+    </div>
   </div>
-</div>
-
-
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="total"></label>  
-  <div class="col-md-12">
-  <input id="num_q" name="num_q" placeholder="Enter total number of questions" class="form-control input-md" type="number">
-    
+  
+  
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-12 control-label" for="total"></label>  
+    <div class="col-md-12">
+    <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number">
+      
+    </div>
   </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="right"></label>  
-  <div class="col-md-12">
-  <input id="right_answer" name="right_answer" placeholder="Enter marks on right answer" class="form-control input-md" min="0" type="number">
-    
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-12 control-label" for="right"></label>  
+    <div class="col-md-12">
+    <input id="right" name="right" placeholder="Enter marks for each question" class="form-control input-md" min="0" type="number">
+      
+    </div>
   </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="wrong"></label>  
-  <div class="col-md-12">
-  <input id="wrong" name="wrong" placeholder="Enter minus marks on wrong answer without sign" class="form-control input-md" min="0" type="number">
-    
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-12 control-label" for="wrong"></label>  
+    <div class="col-md-12">
+    <input id="wrong" name="wrong" placeholder="Enter minus marks on wrong answer" class="form-control input-md" min="0" type="number">
+      
+    </div>
   </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="time"></label>  
-  <div class="col-md-12">
-  <input id="time" name="time" placeholder="Enter time limit for test in minute" class="form-control input-md" min="1" type="number">
-    
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-12 control-label" for="time"></label>  
+    <div class="col-md-12">
+    <input id="time" name="time" placeholder="Enter time limit for test in minute" class="form-control input-md" min="1" type="number">
+      
+    </div>
   </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="tag"></label>  
-  <div class="col-md-12">
-  <input id="tag" name="tag" placeholder="Enter #tag which is used for searching" class="form-control input-md" type="text">
-    
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-12 control-label" for="tag"></label>  
+    <div class="col-md-12">
+    <input id="tag" name="tag" placeholder="Enter #tag which is used for searching" class="form-control input-md" type="text">
+      
+    </div>
   </div>
-</div>
-
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="desc"></label>  
-  <div class="col-md-12">
-  <textarea rows="8" cols="8" name="des" class="form-control" placeholder="Write description here..."></textarea>  
+  
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-12 control-label" for="desc"></label>  
+    <div class="col-md-12">
+    <textarea rows="8" cols="8" name="desc" class="form-control" placeholder="Write description here..."></textarea>  
+    </div>
   </div>
-</div>
 
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
 <h2>Set New Timer</h2>
 <form action="" method="post">
 <div class="col-sm-3">
-                <label for="minute" >Minutes</label>
-                <input type="digit" class="form-control input-group-lg reg_name" name="min" placeholder="Min" Required>
-			</div>
+                <label for="min" >mintues</label>
+                <input type="digit" class="form-control input-group-lg reg_name" name="min" placeholder="min" Required>
+            </div>
 <div class="col-sm-3">
                 <label for="second" >Seconds</label>
                 <input type="digit" class="form-control input-group-lg reg_name" name="sec" placeholder="Sec" Required>
@@ -318,16 +317,16 @@ echo '
 }
 ?>
 <?php
-if(isset($_POST['addquiz'])){
-@$min = $_POST['min'];
-@$sec = $_POST['sec'];
-$timer = $min.':'.$sec;
-$fetchqry3 = "UPDATE `quiz` SET `time`='$timer' WHERE`id`=1";
-$result3 = mysqli_query($con,$fetchqry3);
-if($result3==TRUE){
-	echo "The timer currently set to $timer";
-}
-}
+// if(isset($_POST['addquiz'])){
+// @$min = $_POST['min'];
+// @$sec = $_POST['sec'];
+// $timer = $min.':'.$sec;
+// $fetchqry3 = "UPDATE `quiz` SET `time`='$timer' WHERE`id`=1";
+// $result3 = mysqli_query($con,$fetchqry3);
+// if($result3==TRUE){
+// 	echo "The timer currently set to $timer";
+// }
+// }
 ?>
 
 
@@ -397,37 +396,18 @@ echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
 echo '<div class="form-group">
   <label class="col-md-12 control-label" for=""></label>
   <div class="col-md-12"> 
-    <input  type="submit" name="addqns" style="margin-left:45%" class="btn btn-primary btn-lg" value="Submit" class="btn btn-primary"/>
+    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
   </div>
 </div>
 
 </fieldset>
 </form></div>';
+
+
+
 }
-?>
- <?php if(isset($_POST['addqns'])){
-$fetchqry = "SELECT * FROM `quiz`";
-$result=mysqli_query($con,$fetchqry);
-$num=mysqli_num_rows($result);
-@$eid = $_POST['eid'];
-@$title = $_POST['title'];
-@$sahi = $_POST['sahi'];
-@$wrong = $_POST['wrong'];
-@$total = $_POST['total'];
-@$time = $_POST['time']; 
-@$intro = $_POST['intro']; 
-@$tag = $_POST['tag']; 
-@$date = $_POST['date']; 
-$qry = "INSERT INTO `quiz`(`eid`, `title`, `sahi`, `wrong`, `total`, `time`, `intro`, `tag`, `date`)VALUES ($eid,'$title','$sahi','$wrong','$total','$time','$intro','$tag','$date')";
-$done = mysqli_query($con,$qry);
-if($done==TRUE){
-	echo "Question and Answers Sumbmitted Succesfully";
-}
-	 }
 ?>
 <!--add quiz step 2 end-->
-
-
 </div><!--container closed-->
 </div></div>
 </body>
