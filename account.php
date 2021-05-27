@@ -253,7 +253,7 @@ echo '</table></div></div>';}
 <a href="http://www.projectworlds.in/online-examination" target="_blank">About us</a>
 </div>
 <div class="col-md-3 box">
-<a href="#" data-toggle="modal" data-target="#login">Admin Login</a></div>
+<a href="#" data-toggle="modal" data-target="#login">professors</a></div>
 <div class="col-md-3 box">
 <a href="#" data-toggle="modal" data-target="#developers">Developers</a>
 </div>

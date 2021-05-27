@@ -46,7 +46,7 @@ header("location:index.php");
 }
 else
 {
-$name = $_SESSION['email'];
+$name = $_SESSION['name'];
 
 include_once 'dbConnection.php';
 echo '<span class="pull-right top title1" ><span class="log1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Hello,</span> <a href="account.php" class="log log1">'.$name.'</a>&nbsp;|&nbsp;<a href="logout.php?q=account.php" class="log"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Signout</button></a></span>';
@@ -66,16 +66,17 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="dash.php?q=0"><b>Dashboard</b></a>
+      <a class="navbar-brand" href="admin_dash.php?q=0"><b>Dashboard</b></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li <?php if(@$_GET['q']==0) echo'class="active"'; ?>><a href="dash.php?q=0">Home<span class="sr-only">(current)</span></a></li>
-        <li <?php if(@$_GET['q']==1) echo'class="active"'; ?>><a href="dash.php?q=1">User</a></li>
-		<li <?php if(@$_GET['q']==2) echo'class="active"'; ?>><a href="dash.php?q=2">Ranking</a></li>
-		<li <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a href="dash.php?q=3">Feedback</a></li>
-    <li><a href="dash.php?q=4">Add Quiz</a></li>
+        <li <?php if(@$_GET['q']==0) echo'class="active"'; ?>><a href="admin_dash.php?q=0">Home<span class="sr-only">(current)</span></a></li>
+        
+        <li <?php if(@$_GET['q']==1) echo'class="active"'; ?>><a href="admin_dash.php?q=1">Professors</a></li>
+        <li <?php if(@$_GET['q']==2) echo'class="active"'; ?>><a href="admin_dash.php?q=2">Department</a></li>
+    <li <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a href="admin_dash.php?q=3">Feedback</a></li>
+    <li><a href="admin_dash.php?q=4">Add Department</a></li>
 		
         </li><li class="pull-right"> <a href="logout.php?q=account.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Sign out</a></li>
 		
@@ -91,77 +92,77 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
 
 <?php if(@$_GET['q']==0) {
 
-$result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
-echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-<tr><td><b>S.N.</b></td><td><b>Topic</b></td><td><b>Total question</b></td><td><b>Marks</b></td><td><b>Time limit</b></td><td></td></tr>';
-$c=1;
-while($row = mysqli_fetch_array($result)) {
-  $eid= $row['eid'];
-	$title = $row['title'];
-	$total = $row['total'];
-	$sahi = $row['sahi'];
-  $time = $row['time'];
-	$eid = $row['eid'];
-$q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
-$rowcount=mysqli_num_rows($q12);	
-
-	echo '<tr><td>'.$c++.'</td><td>'.$title.'</td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-  .<td><a href="dash.php?delete='.$eid.'"class="pull-right btn sub1" style="margin:0px;background:#1791b1><span class="glyphicon glyphicon-new-window" aria-hidden="true" style="color:white;"></span>"</span>&nbsp;<span class="title1" style="color:white;"><i class="bi bi-trash"></i>Delete</a></td></tr>';
-}
-$c=0;
-echo '</table></div></div>';
-
-}
-if(isset($_GET['delete'])){
-  $id=$_GET['delete'];
-
-  $q=mysqli_query($con,"DELETE FROM `quiz` WHERE  eid ='$id' " );
-}
-
-//ranking start
-if(@$_GET['q']== 2) 
-{
-$q=mysqli_query($con,"SELECT * FROM rank  ORDER BY score DESC " )or die('Error223');
-echo  '<div class="panel title"><div class="table-responsive">
-<table class="table table-striped title1" >
-<tr style="color:red"><td><b>Rank</b></td><td><b>Name</b></td><td><b>Gender</b></td><td><b>College</b></td><td><b>Score</b></td></tr>';
-$c=0;
-while($row=mysqli_fetch_array($q) )
-{
-$e=$row['email'];
-$s=$row['score'];
-$q12=mysqli_query($con,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
-while($row=mysqli_fetch_array($q12) )
-{
-$name=$row['name'];
-$dep=$row['dep'];
-$level=$row['level'];
-}
-$c++;
-echo '<tr><td style="color:#1791b1"><b>'.$c.'</b></td><td>'.$name.'</td><td>'.$dep.'</td><td>'.$level.'</td><td>'.$s.'</td><td>';
-}
-echo '</table></div></div>';}
+  $result = mysqli_query($con,"SELECT * FROM Admin") or die('Error');
+  echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
+  <tr><td><b>A.N.</b></td><td><b>Name</b></td><td><b>Email</b></td><td></td></tr>';
+  $c=1;
+  while($row = mysqli_fetch_array($result)) {
+  
+    $email = $row['email'];
+    // $level = $row['level'];
+  
+    echo '<tr><td>'.$c++.'</td><td>Admin</td><td>'.$email.'</td>
+    <td><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td></tr>';
+  }
+  $c=0;
+  echo '</table></div></div>';
+  
+  }
 
 ?>
-
 
 <!--home closed-->
 <!--users start-->
 <?php if(@$_GET['q']==1) {
 
-$result = mysqli_query($con,"SELECT * FROM user") or die('Error');
+$result = mysqli_query($con,"SELECT * FROM prof") or die('Error');
 echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-<tr><td><b>S.N.</b></td><td><b>Name</b></td><td><b>department</b></td><td><b>level</b></td><td><b>Email</b></td><td></td></tr>';
+<tr><td><b>P.N.</b></td><td><b>Name</b></td><td><b>department</b></td><td><b>Email</b></td><td></td></tr>';
 $c=1;
 while($row = mysqli_fetch_array($result)) {
 	$name = $row['name'];
 	$dep = $row['dep'];
   $email = $row['email'];
-	$level = $row['level'];
+	// $level = $row['level'];
 
-	echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$dep.'</td><td>'.$level.'</td><td>'.$email.'</td>
+	echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$dep.'</td><td>'.$email.'</td>
 	<td><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td></tr>';
 }
+$c=0;
+echo '</table></div></div>';
+
+}?>
+<!--user end-->
+<!--users start-->
+<?php if(@$_GET['q']==2) {
+
+
+
+
+$result = mysqli_query($con,"SELECT * FROM dep") or die('Error');
+echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
+<tr><td><b>P.N.</b></td><td><b>Name</b></td><td><b>Subject Number</b></td><td><b>Professor</b></td><td></td></tr>';
+$c=1;
+
+
+while($row = mysqli_fetch_array($result)) {
+	$name = $row['name'];
+	$snum = $row['snum'];
+  $prof_id = $row['prof_id'];
+	// $level = $row['level'];
+  echo $prof_id;
+  $result2= mysqli_query($con,"SELECT name FROM prof where id=$prof_id") or die('Error');
+  
+  while($row = mysqli_fetch_array($result)) {
+    $pname=$row['name'];
+  
+	
+  }
+  echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$snum.'</td><td>'.$pname.'</td>
+	<td><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td></tr>';
+
+}
+
 $c=0;
 echo '</table></div></div>';
 
@@ -183,8 +184,8 @@ while($row = mysqli_fetch_array($result)) {
 	$email = $row['email'];
 	$id = $row['id'];
 	 echo '<tr><td>'.$c++.'</td>';
-	echo '<td><a title="Click to open feedback" href="dash.php?q=3&fid='.$id.'">'.$subject.'</a></td><td>'.$email.'</td><td>'.$date.'</td><td>'.$time.'</td><td>'.$name.'</td>
-	<td><a title="Open Feedback" href="dash.php?q=3&fid='.$id.'"><b><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></b></a></td>';
+	echo '<td><a title="Click to open feedback" href="admin_dash.php?q=3&fid='.$id.'">'.$subject.'</a></td><td>'.$email.'</td><td>'.$date.'</td><td>'.$time.'</td><td>'.$name.'</td>
+	<td><a title="Open Feedback" href="admin_dash.php?q=3&fid='.$id.'"><b><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></b></a></td>';
 	echo '<td><a title="Delete Feedback" href="update.php?fdid='.$id.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td>
 
 	</tr>';

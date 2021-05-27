@@ -8,7 +8,7 @@ $email = stripslashes($email);
 $email = addslashes($email);
 $password = stripslashes($password); 
 $password = addslashes($password);
-$result = mysqli_query($con,"SELECT email FROM admin WHERE email = '$email' and password = '$password'") or die('Error');
+$result = mysqli_query($con,"SELECT email FROM prof WHERE email = '$email' and password = '$password'") or die('Error');
 $count=mysqli_num_rows($result);
 if($count==1){
 session_start();
@@ -17,7 +17,7 @@ session_unset();}
 $_SESSION["name"] = 'Admin';
 $_SESSION["key"] ='123456789';
 $_SESSION["email"] = $email;
-header("location:admin_dash.php?q=0");
+header("location:dash.php?q=0");
 }
 else header("location:$ref?w=Warning : Access denied");
 ?>
