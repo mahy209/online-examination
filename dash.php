@@ -72,10 +72,9 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li <?php if(@$_GET['q']==0) echo'class="active"'; ?>><a href="dash.php?q=0">Home<span class="sr-only">(current)</span></a></li>
-        <li <?php if(@$_GET['q']==1) echo'class="active"'; ?>><a href="dash.php?q=1">User</a></li>
+        <li <?php if(@$_GET['q']==1) echo'class="active"'; ?>><a href="dash.php?q=1">Students</a></li>
 		<li <?php if(@$_GET['q']==2) echo'class="active"'; ?>><a href="dash.php?q=2">Ranking</a></li>
-		<li <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a href="dash.php?q=3">Feedback</a></li>
-    <li><a href="dash.php?q=4">Add Quiz</a></li>
+    <li><a href="dash.php?q=4">Add Exam</a></li>
 		
         </li><li class="pull-right"> <a href="logout.php?q=account.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Sign out</a></li>
 		
@@ -168,32 +167,6 @@ echo '</table></div></div>';
 }?>
 <!--user end-->
 
-<!--feedback start-->
-<?php if(@$_GET['q']==3) {
-$result = mysqli_query($con,"SELECT * FROM `feedback` ORDER BY `feedback`.`date` DESC") or die('Error');
-echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-<tr><td><b>S.N.</b></td><td><b>Subject</b></td><td><b>Email</b></td><td><b>Date</b></td><td><b>Time</b></td><td><b>By</b></td><td></td><td></td></tr>';
-$c=1;
-while($row = mysqli_fetch_array($result)) {
-	$date = $row['date'];
-	$date= date("d-m-Y",strtotime($date));
-	$time = $row['time'];
-	$subject = $row['subject'];
-	$name = $row['name'];
-	$email = $row['email'];
-	$id = $row['id'];
-	 echo '<tr><td>'.$c++.'</td>';
-	echo '<td><a title="Click to open feedback" href="dash.php?q=3&fid='.$id.'">'.$subject.'</a></td><td>'.$email.'</td><td>'.$date.'</td><td>'.$time.'</td><td>'.$name.'</td>
-	<td><a title="Open Feedback" href="dash.php?q=3&fid='.$id.'"><b><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></b></a></td>';
-	echo '<td><a title="Delete Feedback" href="update.php?fdid='.$id.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td>
-
-	</tr>';
-}
-echo '</table></div></div>';
-}
-?>
-<!--feedback closed-->
-
 <!--feedback reading portion start-->
 <?php if(@$_GET['fid']) {
 echo '<br />';
@@ -218,7 +191,7 @@ echo '<div class="panel"<a title="Back to Archive" href="update.php?q1=2"><b><sp
 if(@$_GET['q']==4 && !(@$_GET['step']) ) {
   echo ' 
   <div class="row">
-  <span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Quiz Details</b></span><br /><br />
+  <span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Exam Details</b></span><br /><br />
    <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="update.php?q=addquiz"  method="POST">
   <fieldset>
   
@@ -227,7 +200,7 @@ if(@$_GET['q']==4 && !(@$_GET['step']) ) {
   <div class="form-group">
     <label class="col-md-12 control-label" for="name"></label>  
     <div class="col-md-12">
-    <input id="name" name="name" placeholder="Enter Quiz title" class="form-control input-md" type="text">
+    <input id="name" name="name" placeholder="Enter subject name" class="form-control input-md" type="text">
       
     </div>
   </div>

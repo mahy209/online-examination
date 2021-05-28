@@ -105,7 +105,7 @@ if($rowcount == 0){
 }
 else
 {
-echo '<tr style="color:#1791b1"><td>'.$c++.'</td><td>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
+echo '<tr style="color:#1791b1"><td>'.$c++.'</td><td>'.$title.'&nbsp;<span title="This exam is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
 	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'" </a></b></td></tr>';
 }
 
@@ -205,7 +205,7 @@ if(@$_GET['q']== 2)
 $q=mysqli_query($con,"SELECT * FROM history WHERE email='$email' ORDER BY date DESC " )or die('Error197');
 echo  '<div class="panel title">
 <table class="table table-striped title1" >
-<tr style="color:red"><td><b>S.N.</b></td><td><b>Quiz</b></td><td><b>Question Solved</b></td><td><b>Right</b></td><td><b>Wrong<b></td><td><b>Score</b></td>';
+<tr style="color:red"><td><b>S.N.</b></td><td><b>Exam</b></td><td><b>Question Solved</b></td><td><b>Right</b></td><td><b>Wrong<b></td><td><b>Score</b></td>';
 $c=0;
 while($row=mysqli_fetch_array($q) )
 {
@@ -247,76 +247,6 @@ echo '</table></div></div>';}
 
 
 </div></div></div></div>
-<!--Footer start-->
-<div class="row footer">
-<div class="col-md-3 box">
-<a href="http://www.projectworlds.in/online-examination" target="_blank">About us</a>
-</div>
-<div class="col-md-3 box">
-<a href="#" data-toggle="modal" data-target="#login">professors</a></div>
-<div class="col-md-3 box">
-<a href="#" data-toggle="modal" data-target="#developers">Developers</a>
-</div>
-<div class="col-md-3 box">
-<a href="feedback.php" target="_blank">Feedback</a></div></div>
-<!-- Modal For Developers-->
-<div class="modal fade title1" id="developers">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" style="font-family:'typo' "><span style="color:#1791b1;">Developers</span></h4>
-      </div>
-	  
-      <div class="modal-body">
-        <p>
-		<div class="row">
-		<div class="col-md-4">
-		 <img src="image/kfs.png" width=100 height=100 alt="KFU" class="img-rounded">
-		 </div>
-		 <div class="col-md-5">
-		<a href="https://github.com/mahy209/online-examination" style="color:#202020; font-family:'typo' ; font-size:18px" title="Find on Facebook">online examination system</a>
-		<h4 style="font-family:'typo' ">computer and information technology kfs university, se department</h4></div></div>
-		</p>
-      </div>
-    
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!--Modal for admin login-->
-	 <div class="modal fade" id="login">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title"><span style="color:#1791b1;font-family:'typo' ">LOGIN</span></h4>
-      </div>
-      <div class="modal-body title1">
-<div class="row">
-<div class="col-md-3"></div>
-<div class="col-md-6">
-<form role="form" method="post" action="admin.php?q=index.php">
-<div class="form-group">
-<input type="text" name="uname" maxlength="20"  placeholder="Admin user id" class="form-control"/> 
-</div>
-<div class="form-group">
-<input type="password" name="password" maxlength="15" placeholder="Password" class="form-control"/>
-</div>
-<div class="form-group" align="center">
-<input type="submit" name="login" value="Login" class="btn btn-primary" />
-</div>
-</form>
-</div><div class="col-md-3"></div></div>
-      </div>
-      <!--<div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>-->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!--footer end-->
-
 
 </body>
 </html>
