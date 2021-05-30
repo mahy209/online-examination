@@ -77,10 +77,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                     <li class="dropdown <?php if (@$_GET['q'] == 4 || @$_GET['q'] == 5) echo 'active"'; ?>">
                     <li><a href="admin_dash.php?q=4">Add Department</a></li>
                     <li><a href="admin_dash.php?q=10">Add Subject</a></li>
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li <?php echo ''; ?>> <a href="logout1.php?q=dashboard.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
+                    <li <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a href="admin_dash.php?q=3"> students Feedback</a></li>
                 </ul>
           </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -103,7 +100,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                         $t=$row['title'];
                         $s=$row['status'];
                         $c++;
-                        echo '<tr><td style="color:#99cc32"><center><b>'.$c.'</b></center></td><td><center>'.$t.'</center></td><td><center><a href="admin_dash.php?approve='.$q_id.'">Approve</a></center></td></td><td><center> <a href="admin_dash.php?unapprove='.$q_id.'">Un Approve</a></center></td><td><center> <a href="admin_dash.php?delete='.$q_id.'">Delete Quiz</a></center></td>';
+                        echo '<tr><td style="color:#1791b1"><center><b>'.$c.'</b></center></td><td><center>'.$t.'</center></td><td><center><a href="admin_dash.php?approve='.$q_id.'">Approve</a></center></td></td><td><center> <a href="admin_dash.php?unapprove='.$q_id.'">Un Approve</a></center></td><td><center> <a href="admin_dash.php?delete='.$q_id.'">Delete Quiz</a></center></td>';
                     }
                     echo '</table></div></div>';
                 
@@ -115,7 +112,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                     $q = mysqli_query($con, "SELECT * FROM subject ") or die('Error223');
                     echo  '<div class="panel title"><div class="table-responsive">
                     <table class="table table-striped title1" >
-                    <tr style="color:green"><td><center><b>S.N</b></center></td><td><center><b>Subject Name</b></center></td><td><center><b>Subject Code</b></center></td><td><center><b>Subject Department</b></center></td><td><center><b>Subject Hours</b></center></td><td><center><b>Subject Level</b></center></td><td><center><b>Subject Professor</b></center></td><td><center><b>ِActions</b></center></td></tr>';
+                    <tr style="color:#1791b1"><td><center><b>S.N</b></center></td><td><center><b>Subject Name</b></center></td><td><center><b>Subject Code</b></center></td><td><center><b>Subject Department</b></center></td><td><center><b>Subject Hours</b></center></td><td><center><b>Subject Level</b></center></td><td><center><b>Subject Professor</b></center></td><td><center><b>ِActions</b></center></td></tr>';
                     $c = 0;
                     while ($row = mysqli_fetch_array($q)) {
                         $sid = $row['id'];
@@ -139,7 +136,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                             
                         }
                         $c++;
-                        echo '<tr><td style="color:#99cc32"><center><b>' . $c . '</b></center></td><td><center>' . $Stitle . '</center></td><td><center>' . $code . '</center></td><td><center>' . $Dtitle . '</center></td><td><center>' . $hour . 'H</center></td><td><center> ' . $level . '</center></td><td><center>' . $prof_name . '</center></td><td><center><a href="update.php?subject='.$sid.'" style=color:green>Edit</a></center></td>';
+                        echo '<tr><td style="color:#1791b1"><center><b>' . $c . '</b></center></td><td><center>' . $Stitle . '</center></td><td><center>' . $code . '</center></td><td><center>' . $Dtitle . '</center></td><td><center>' . $hour . 'H</center></td><td><center> ' . $level . '</center></td><td><center>' . $prof_name . '</center></td><td><center><a href="update.php?subject='.$sid.'" style=color:#1791b1>Edit</a></center></td>';
                     }
                     echo '</table></div></div>';
                 }
