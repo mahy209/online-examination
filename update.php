@@ -21,6 +21,34 @@ $result = mysqli_query($con,"DELETE FROM user WHERE email='$demail' ") or die('E
 header("location:dash.php?q=1");
 }
 }
+
+//add department
+if(@$_GET['q']== 'addDep') 
+{
+  $name = $_POST['name'];
+  $total = $_POST['total'];
+  $q3=mysqli_query($con,"INSERT INTO `dep`(`name`, `Snum`) VALUES ('$name' ,'$total')");
+  header("location:admin_dash.php");
+}
+
+
+
+//add subject
+
+if(@$_GET['q']== 'addsub') 
+{
+  $title= $_POST['name'];
+  $prof=$_POST['prof'];
+  $dep = $_POST['dep'];
+  $hour=$_POST['hour'];
+  $code=$_POST['code'];
+  $level=$_POST['level'];
+  $q3=mysqli_query($con,"INSERT INTO `subject`(`dep_id`, `prof_id`, `name`, `hour`, `level`,`code`, `date`) VALUES ('$dep','$prof', '$title', '$hour', '$level','$code', NOW())");
+  header("location:admin_dash.php?q=2");
+}
+
+
+
 //remove quiz
 if(isset($_SESSION['key'])){
 if(@$_GET['q']== 'rmquiz') {

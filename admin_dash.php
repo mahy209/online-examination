@@ -70,17 +70,18 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li <?php if(@$_GET['q']==0) echo'class="active"'; ?>><a href="admin_dash.php?q=0">Home<span class="sr-only">(current)</span></a></li>
-        
-        <li <?php if(@$_GET['q']==1) echo'class="active"'; ?>><a href="admin_dash.php?q=1">Professors</a></li>
-        <li <?php if(@$_GET['q']==2) echo'class="active"'; ?>><a href="admin_dash.php?q=2">Department</a></li>
-    <li <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a href="admin_dash.php?q=3">Feedback</a></li>
-    <li><a href="admin_dash.php?q=4">Add Department</a></li>
-		
-        </li><li class="pull-right"> <a href="logout.php?q=account.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Sign out</a></li>
-		
-      </ul>
+    <ul class="nav navbar-nav navbar-left">
+                    <li <?php if (@$_GET['q'] == 0) echo 'class="active"'; ?>><a href="admin_dash.php?q=0">Home<span class="sr-only">(current)</span></a></li>
+                    <li <?php if (@$_GET['q'] == 20) echo 'class="active"'; ?>><a href="admin_dash.php?q=20">Professor</a></li>
+                    <li <?php if (@$_GET['q'] == 2) echo 'class="active"'; ?>><a href="admin_dash.php?q=2">Subject</a></li>
+                    <li class="dropdown <?php if (@$_GET['q'] == 4 || @$_GET['q'] == 5) echo 'active"'; ?>">
+                    <li><a href="admin_dash.php?q=4">Add Department</a></li>
+                    <li><a href="admin_dash.php?q=10">Add Subject</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li <?php echo ''; ?>> <a href="logout1.php?q=dashboard.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
+                </ul>
           </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -90,84 +91,221 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
 <div class="col-md-12">
 <!--home start-->
 
-<?php if(@$_GET['q']==0) {
+<?php if (@$_GET['q'] == 0) {
+                    $q=mysqli_query($con,"SELECT * FROM quiz  ORDER BY date DESC " )or die('Error223');
+                    echo  '<div class="panel title"><div class="table-responsive">
+                    <table class="table table-striped title1" >
+                    <tr"><td><center><b>Q.N</b></center></td><td><center><b>Name</b></center></td><td><center><b>Approve</b></center></td><td><center><b>UnApprove</b></center></td><td><center><b>Delete</b></center></td></tr>';
+                    $c=0;
+                    while($row=mysqli_fetch_array($q) )
+                    {
+                        $q_id=$row['eid'];
+                        $t=$row['title'];
+                        $s=$row['status'];
+                        $c++;
+                        echo '<tr><td style="color:#99cc32"><center><b>'.$c.'</b></center></td><td><center>'.$t.'</center></td><td><center><a href="admin_dash.php?approve='.$q_id.'">Approve</a></center></td></td><td><center> <a href="admin_dash.php?unapprove='.$q_id.'">Un Approve</a></center></td><td><center> <a href="admin_dash.php?delete='.$q_id.'">Delete Quiz</a></center></td>';
+                    }
+                    echo '</table></div></div>';
+                
+                   
 
-  $result = mysqli_query($con,"SELECT * FROM Admin") or die('Error');
-  echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-  <tr><td><b>A.N.</b></td><td><b>Name</b></td><td><b>Email</b></td><td></td></tr>';
-  $c=1;
-  while($row = mysqli_fetch_array($result)) {
-  
-    $email = $row['email'];
-    // $level = $row['level'];
-  
-    echo '<tr><td>'.$c++.'</td><td>Admin</td><td>'.$email.'</td>
-    <td><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td></tr>';
-  }
-  $c=0;
-  echo '</table></div></div>';
-  
-  }
+                }
 
-?>
+                if (@$_GET['q'] == 2) {
+                    $q = mysqli_query($con, "SELECT * FROM subject ") or die('Error223');
+                    echo  '<div class="panel title"><div class="table-responsive">
+                    <table class="table table-striped title1" >
+                    <tr style="color:green"><td><center><b>S.N</b></center></td><td><center><b>Subject Name</b></center></td><td><center><b>Subject Code</b></center></td><td><center><b>Subject Department</b></center></td><td><center><b>Subject Hours</b></center></td><td><center><b>Subject Level</b></center></td><td><center><b>Subject Professor</b></center></td><td><center><b>ِActions</b></center></td></tr>';
+                    $c = 0;
+                    while ($row = mysqli_fetch_array($q)) {
+                        $sid = $row['id'];
+                        $prof_id=$row['prof_id'];
+                        $dep_id = $row['dep_id'];
+                        $hour = $row['hour'];
+                        $code = $row['code'];
+                        $Stitle = $row['name'];
 
-<!--home closed-->
-<!--users start-->
-<?php if(@$_GET['q']==1) {
-
-$result = mysqli_query($con,"SELECT * FROM prof") or die('Error');
-echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-<tr><td><b>P.N.</b></td><td><b>Name</b></td><td><b>department</b></td><td><b>Email</b></td><td></td></tr>';
-$c=1;
-while($row = mysqli_fetch_array($result)) {
-	$name = $row['name'];
-	$dep = $row['dep'];
-  $email = $row['email'];
-	// $level = $row['level'];
-
-	echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$dep.'</td><td>'.$email.'</td>
-	<td><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td></tr>';
-}
-$c=0;
-echo '</table></div></div>';
-
-}?>
-<!--user end-->
-<!--users start-->
-<?php if(@$_GET['q']==2) {
+                        $level = $row['level'];
+                        $q12 = mysqli_query($con, "SELECT * FROM dep WHERE id='$dep_id' ") or die('Error232');
+                        while ($row = mysqli_fetch_array($q12)) {
+                            
+                            $Dtitle = $row['name'];
+                            $q13 = mysqli_query($con, "SELECT * FROM prof WHERE id='$prof_id' ") or die('Error233');
+                            while ($row = mysqli_fetch_array($q13)) {
+                                $prof_name=$row['name'];
+                            }
 
 
+                            
+                        }
+                        $c++;
+                        echo '<tr><td style="color:#99cc32"><center><b>' . $c . '</b></center></td><td><center>' . $Stitle . '</center></td><td><center>' . $code . '</center></td><td><center>' . $Dtitle . '</center></td><td><center>' . $hour . 'H</center></td><td><center> ' . $level . '</center></td><td><center>' . $prof_name . '</center></td><td><center><a href="update.php?subject='.$sid.'" style=color:green>Edit</a></center></td>';
+                    }
+                    echo '</table></div></div>';
+                }
+
+                if(isset($_GET['delete'])){
+                    $the_quiz_id = $_GET['delete'];
+                    $sql_delete = " DELETE FROM `quiz` WHERE `eid` = '$the_quiz_id' ";
+                    $deleteQuiz=mysqli_query($con, $sql_delete);
+                    ;
+                }
+
+                if(isset($_GET['approve'])){
+                    $the_quiz_id = $_GET['approve'];
+                    $sql_approve= " UPDATE `quiz` SET  `status` = 'approved'  WHERE `eid` = '$the_quiz_id' ";
+                    $approvequiz=mysqli_query($con, $sql_approve);
+                    
+                }
+
+                if(isset($_GET['unapprove'])){
+                    $the_quiz_id = $_GET['unapprove'];
+                    $sql_unapprove= " UPDATE `quiz` SET   `status` = 'unapproved'  WHERE `eid` = '$the_quiz_id' ";
+                    $unapprovequiz=mysqli_query($con, $sql_unapprove);
+                    
+                }
+
+                ?>
+                <?php
+                if (@$_GET['q'] == 20) {
+                    $result = mysqli_query($con, "SELECT * FROM `prof`") or die('Error');
+                    echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
+                        <tr><td><center><b>P.N.</b></center></td><td><center><b>Name</b></center></td><td><center><b>Email</b></center></td><td><center><b>Action</b></center></td></tr>';
+                    $c = 0;
+                    while ($row = mysqli_fetch_array($result)) {
+
+                        $name = $row['name'];
+                        $id = $row['id'];
+                        $email = $row['email'];
+                        $c++;
+                        
+                        echo '<tr><td><center>' . $c . '</center></td><td><center>' . $name . '</center></td><td><center>' . $email . '</center></td><td><center><a title="Delete User" href="update.php?demail=' . $email . '"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></center></td></tr>';
+                    }
+
+                    echo '</table></div></div>';
+                }
+                ?>
+
+                <?php
+                if (@$_GET['q'] == 4 && !(@$_GET['step'])) {
+                    echo '<div class="row"><span class="title1" style="margin-left:40%;font-size:30px;color:#fff;"><b>Add Department</b></span><br /><br />
+                        <div class="col-md-3"></div><div class="col-md-6">   
+                        <form class="form-horizontal title1" name="form" action="update.php?q=addDep"  method="POST">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label" for="name"></label>  
+                                    <div class="col-md-12">
+                                        <input id="name" name="name" placeholder="Enter Department title" class="form-control input-md" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                <label class="col-md-12 control-label" for="total"></label>  
+                                <div class="col-md-12">
+                                    <input id="total" name="total" placeholder="Enter number of subjects" class="form-control input-md" type="number">
+                                </div>
+                            </div>
+
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label" for=""></label>
+                                    <div class="col-md-12"> 
+                                        <input  type="submit" name="addDep" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form></div>';
+                }
+                ?>
+
+                <?php
+                if (@$_GET['q'] == 10) {
+                    
+                    echo '<div class="row"><span class="title1" style="margin-left:40%;font-size:30px;color:#fff;"><b>Add Subject</b></span><br /><br />
+                        <div class="col-md-3"></div><div class="col-md-6">   
+                        <form class="form-horizontal title1" name="form" action="update.php?q=addsub"  method="POST">
+                            <fieldset>
+
+                            <div class="form-group">
+                            <label class="col-md-12 control-label" for="name"></label>  
+                            <div class="col-md-12">';
+                            
+                                echo'<select id="name" name="dep" placeholder="Enter Department title" class="form-control input-md" type="text">
+                                <option>Choose Department</option>';
+                                $q = mysqli_query($con, "SELECT * FROM dep");
+                                while ($row = mysqli_fetch_array($q)) {
+                                    $dep_id=$row['id'];
+                                    $title = $row['name'];
+                                    echo' <option value="'.$dep_id.'">'.$title.'</option>';
+                                };
+                                echo '</select>';
+                            
+                            echo'</div>
+                        </div>
 
 
-$result = mysqli_query($con,"SELECT * FROM dep") or die('Error');
-echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-<tr><td><b>P.N.</b></td><td><b>Name</b></td><td><b>Subject Number</b></td><td><b>Professor</b></td><td></td></tr>';
-$c=1;
+                        <div class="form-group">
+                        <label class="col-md-12 control-label" for="name"></label>  
+                        <div class="col-md-12">';
+                        
+                            echo'<select id="name" name="prof" placeholder="Enter Department title" class="form-control input-md" type="text">
+                            <option>Choose Professor Name</option>';
+                            $q = mysqli_query($con, "SELECT * FROM prof ");
+                            while ($row = mysqli_fetch_array($q)) {
+                                $prof_id=$row['id'];
+                                $name = $row['name'];
+                                echo' <option value="'.$prof_id.'">'.$name.'</option>';
+                            };
+                            echo '</select>';
+                        
+                        echo'</div>
+                    </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label" for="name"></label>  
+                                    <div class="col-md-12">
+                                        <input id="name" name="name" placeholder="Enter subject title" class="form-control input-md" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label" for="name"></label>  
+                                    <div class="col-md-12">
+                                        <input id="code" name="code" placeholder="Enter subject code" class="form-control input-md" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label" for="name"></label>  
+                                    <div class="col-md-12">
+                                        <input id="level" name="level" placeholder="Enter subject Level" class="form-control input-md" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                <label class="col-md-12 control-label" for="total"></label>  
+                                <div class="col-md-12">
+                                    <input id="total" name="hour" placeholder="Enter hour of subjects" class="form-control input-md" type="number">
+                                </div>
+                            </div>
+
+                                
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label" for=""></label>
+                                    <div class="col-md-12"> 
+                                        <input  type="submit" name="addsub" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form></div>';
+                }
+                ?>
 
 
-while($row = mysqli_fetch_array($result)) {
-	$name = $row['name'];
-	$snum = $row['snum'];
-  $prof_id = $row['prof_id'];
-	// $level = $row['level'];
-  echo $prof_id;
-  $result2= mysqli_query($con,"SELECT name FROM prof where id=$prof_id") or die('Error');
-  
-  while($row = mysqli_fetch_array($result)) {
-    $pname=$row['name'];
-  
-	
-  }
-  echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$snum.'</td><td>'.$pname.'</td>
-	<td><a title="Delete User" href="update.php?demail='.$email.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td></tr>';
 
-}
 
-$c=0;
-echo '</table></div></div>';
 
-}?>
-<!--user end-->
 
 <!--feedback start-->
 <?php if(@$_GET['q']==3) {
@@ -215,200 +353,8 @@ echo '<div class="panel"<a title="Back to Archive" href="update.php?q1=2"><b><sp
 <!--Feedback reading portion closed-->
 
 <!--add quiz start-->
-<?php
-if(@$_GET['q']==4 && !(@$_GET['step']) ) {
-  echo ' 
-  <div class="row">
-  <span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Quiz Details</b></span><br /><br />
-   <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="update.php?q=addquiz"  method="POST">
-  <fieldset>
-  
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-12 control-label" for="name"></label>  
-    <div class="col-md-12">
-    <input id="name" name="name" placeholder="Enter Quiz title" class="form-control input-md" type="text">
-      
-    </div>
-  </div>
-  
-  
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-12 control-label" for="total"></label>  
-    <div class="col-md-12">
-    <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number">
-      
-    </div>
-  </div>
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-12 control-label" for="right"></label>  
-    <div class="col-md-12">
-    <input id="right" name="right" placeholder="Enter marks for each question" class="form-control input-md" min="0" type="number">
-      
-    </div>
-  </div>
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-12 control-label" for="wrong"></label>  
-    <div class="col-md-12">
-    <input id="wrong" name="wrong" placeholder="Enter minus marks on wrong answer" class="form-control input-md" min="0" type="number">
-      
-    </div>
-  </div>
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-12 control-label" for="time"></label>  
-    <div class="col-md-12">
-    <input id="time" name="time" placeholder="Enter time limit for test in minute" class="form-control input-md" min="1" type="number">
-      
-    </div>
-  </div>
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-12 control-label" for="tag"></label>  
-    <div class="col-md-12">
-    <input id="tag" name="tag" placeholder="Enter #tag which is used for searching" class="form-control input-md" type="text">
-      
-    </div>
-  </div>
-  
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-12 control-label" for="desc"></label>  
-    <div class="col-md-12">
-    <textarea rows="8" cols="8" name="desc" class="form-control" placeholder="Write description here..."></textarea>  
-    </div>
-  </div>
-
-<div class="row">
-    <div class="col-md-offset-2 col-md-8">
-<h2>Set New Timer</h2>
-<form action="" method="post">
-<div class="col-sm-3">
-                <label for="min" >mintues</label>
-                <input type="digit" class="form-control input-group-lg reg_name" name="min" placeholder="min" Required>
-            </div>
-<div class="col-sm-3">
-                <label for="second" >Seconds</label>
-                <input type="digit" class="form-control input-group-lg reg_name" name="sec" placeholder="Sec" Required>
-            </div><br>
-
-<form>
-</div></div>
 
 
-<div class="form-group">
-  <label class="col-md-12 control-labe"l" for=""></label>
-  <div class="col-md-12"> 
-    <input  type="submit" name="addquiz" style="margin-left:45%" class="btn btn-primary btn-lg" value="Submit" class="btn btn-primary"/>
-  </div>
-</div>
-
-</fieldset>
-</form></div>';
-}
-?>
-<?php
-// if(isset($_POST['addquiz'])){
-// @$min = $_POST['min'];
-// @$sec = $_POST['sec'];
-// $timer = $min.':'.$sec;
-// $fetchqry3 = "UPDATE `quiz` SET `time`='$timer' WHERE`id`=1";
-// $result3 = mysqli_query($con,$fetchqry3);
-// if($result3==TRUE){
-// 	echo "The timer currently set to $timer";
-// }
-// }
-?>
-
-
-<!--add quiz end-->
-
-<!--add quiz step2 start-->
-<?php
-if(@$_GET['q']==4 && (@$_GET['step'])==2 ) {
-echo ' 
-<div class="row">
-<span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Question Details</b></span><br /><br />
- <div class="col-md-3"></div><div class="col-md-6"><form class="form-horizontal title1" name="form" action="update.php?q=addqns&n='.@$_GET['n'].'&eid='.@$_GET['eid'].'&ch=4 "  method="POST">
-<fieldset>
-';
- 
- for($i=1;$i<=@$_GET['n'];$i++)
- {
-echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="qns'.$i.' "></label>  
-  <div class="col-md-12">
-  <textarea rows="3" cols="5" name="qns'.$i.'" class="form-control" placeholder="Write question number '.$i.' here..."></textarea>  
-  </div>
-</div>
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="'.$i.'1"></label>  
-  <div class="col-md-12">
-  <input id="'.$i.'1" name="'.$i.'1" placeholder="Enter option a" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="'.$i.'2"></label>  
-  <div class="col-md-12">
-  <input id="'.$i.'2" name="'.$i.'2" placeholder="Enter option b" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="'.$i.'3"></label>  
-  <div class="col-md-12">
-  <input id="'.$i.'3" name="'.$i.'3" placeholder="Enter option c" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="'.$i.'4"></label>  
-  <div class="col-md-12">
-  <input id="'.$i.'4" name="'.$i.'4" placeholder="Enter option d" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-<br />
-<b>Correct answer</b>:<br />
-<select id="ans'.$i.'" name="ans'.$i.'" placeholder="Choose correct answer " class="form-control input-md" >
-   <option value="a">Select answer for question '.$i.'</option>
-  <option value="a">option a</option>
-  <option value="b">option b</option>
-  <option value="c">option c</option>
-  <option value="d">option d</option> </select><br /><br />'; 
- }
-    
-echo '<div class="form-group">
-  <label class="col-md-12 control-label" for=""></label>
-  <div class="col-md-12"> 
-    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
-  </div>
-</div>
-
-</fieldset>
-</form></div>';
-
-
-
-}
-?>
-<!--add quiz step 2 end-->
 </div><!--container closed-->
 </div></div>
 </body>
