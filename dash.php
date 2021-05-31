@@ -186,7 +186,7 @@ echo '<div class="panel"<a title="Back to Archive" href="update.php?q1=2"><b><sp
 }?>
 <!--Feedback reading portion closed-->
 
-<!--add quiz start-->
+<!--add exam start-->
 <?php
 if(@$_GET['q']==4 && !(@$_GET['step']) ) {
   echo ' 
@@ -303,9 +303,9 @@ if(@$_GET['q']==4 && !(@$_GET['step']) ) {
 ?>
 
 
-<!--add quiz end-->
+<!--add exam end-->
 
-<!--add quiz step2 start-->
+<!--add exam step2 start-->
 <?php
 if(@$_GET['q']==4 && (@$_GET['step'])==2 ) {
 echo ' 
@@ -380,7 +380,7 @@ echo '<div class="form-group">
 
 }
 ?>
-<!--add quiz step 2 end-->
+<!--add exam step 2 end-->
 </div><!--container closed-->
 </div></div>
 </body>

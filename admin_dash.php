@@ -100,7 +100,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                         $t=$row['title'];
                         $s=$row['status'];
                         $c++;
-                        echo '<tr><td style="color:#1791b1"><center><b>'.$c.'</b></center></td><td><center>'.$t.'</center></td><td><center><a href="admin_dash.php?approve='.$q_id.'">Approve</a></center></td></td><td><center> <a href="admin_dash.php?unapprove='.$q_id.'">Un Approve</a></center></td><td><center> <a href="admin_dash.php?delete='.$q_id.'">Delete Quiz</a></center></td>';
+                        echo '<tr><td style="color:#1791b1"><center><b>'.$c.'</b></center></td><td><center>'.$t.'</center></td><td><center><a href="admin_dash.php?approve='.$q_id.'">Approve</a></center></td></td><td><center> <a href="admin_dash.php?unapprove='.$q_id.'">Un Approve</a></center></td><td><center> <a href="admin_dash.php?delete='.$q_id.'">Delete Exam</a></center></td>';
                     }
                     echo '</table></div></div>';
                 
@@ -348,8 +348,6 @@ echo '<div class="panel"<a title="Back to Archive" href="update.php?q1=2"><b><sp
 <span style="line-height:35px;padding:5px;">&nbsp;<b>Time:</b>&nbsp;'.$time.'</span><span style="line-height:35px;padding:5px;">&nbsp;<b>By:</b>&nbsp;'.$name.'</span><br />'.$feedback.'</div></div>';}
 }?>
 <!--Feedback reading portion closed-->
-
-<!--add quiz start-->
 
 
 </div><!--container closed-->

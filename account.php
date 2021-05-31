@@ -141,7 +141,7 @@ var countdownTimer = setInterval('secondPassed()', 1000);
 
 <!--home closed-->
 
-<!--quiz start-->
+<!--exam start-->
 <?php
 if(@$_GET['q']== 'quiz' && @$_GET['step']== 2) {
 $eid=@$_GET['eid'];
@@ -197,7 +197,7 @@ echo '</table></div>';
 
 }
 ?>
-<!--quiz end-->
+<!--exam end-->
 <?php
 //history start
 if(@$_GET['q']== 2) 
