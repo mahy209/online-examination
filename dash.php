@@ -204,8 +204,19 @@ if(@$_GET['q']==4 && !(@$_GET['step']) ) {
       
     </div>
   </div>
-  
-  
+
+  <!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="diff_level"></label>
+  <div class="col-md-12">
+    <select id="diff_level" name="diff_level" placeholder="Enter diffulty level" class="form-control input-md" >
+   <option >Select diffuclty level</option>
+  <option value="easy">easy</option>
+  <option value="intermediate">intermediate</option> 
+  <option value="diffcult">diffcult</option>
+  </select>
+  </div>
+</div>
   
   <!-- Text input-->
   <div class="form-group">
@@ -218,7 +229,7 @@ if(@$_GET['q']==4 && !(@$_GET['step']) ) {
   
   <!-- Text input-->
   <div class="form-group">
-    <label class="col-md-12 control-label" for="right"></label>  
+    <label class="col-md-12 control-label" for="sahi"></label>  
     <div class="col-md-12">
     <input id="right" name="right" placeholder="Enter marks for each question" class="form-control input-md" min="0" type="number">
       
@@ -227,7 +238,7 @@ if(@$_GET['q']==4 && !(@$_GET['step']) ) {
   
   <!-- Text input-->
   <div class="form-group">
-    <label class="col-md-12 control-label" for="wrong"></label>  
+    <label class="col-md-12 control-label" for="wrong"></label>
     <div class="col-md-12">
     <input id="wrong" name="wrong" placeholder="Enter minus marks on wrong answer" class="form-control input-md" min="0" type="number">
       
@@ -375,9 +386,6 @@ echo '<div class="form-group">
 
 </fieldset>
 </form></div>';
-
-
-
 }
 ?>
 <!--add exam step 2 end-->

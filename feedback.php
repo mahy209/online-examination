@@ -166,7 +166,7 @@ You can send us your feedback through e-mail on the following e-mail id:<br />
 		 <img src="image/kfs.png" width=100 height=100 alt="KFU" class="img-rounded">
 		 </div>
 		 <div class="col-md-5">
-		<a href="https://github.com/mahy209/online-examination" style="color:#202020; font-family:'typo' ; font-size:18px" title="Find on Facebook">online examination system</a>
+		<a href="https://github.com/mahy209/online-examination" target="_blank" style="color:#202020; font-family:'typo' ; font-size:18px" title="Find on Facebook">online examination system</a>
 		<h4 style="font-family:'typo' ">computer and information technology kfs university, se department</h4></div></div>
 		</p>
       </div>

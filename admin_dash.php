@@ -86,13 +86,13 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
 <div class="container"><!--container start-->
 <div class="row">
 <div class="col-md-12">
-<!--home start-->
 
+<!--home start-->
 <?php if (@$_GET['q'] == 0) {
                     $q=mysqli_query($con,"SELECT * FROM quiz  ORDER BY date DESC " )or die('Error223');
-                    echo  '<div class="panel title"><div class="table-responsive">
+                    echo  '<div class="panel title" class="btn-group btn-group-justified"><div class="table-responsive">
                     <table class="table table-striped title1" >
-                    <tr"><td><center><b>Q.N</b></center></td><td><center><b>Name</b></center></td><td><center><b>Approve</b></center></td><td><center><b>UnApprove</b></center></td><td><center><b>Delete</b></center></td></tr>';
+                    <tr"><td><center><b>Q.N</b></center></td><td><center><b>Name</b></center></td><td><center><b>Approve</b></center></td><td><center><b>UnApprove</b></center></td></tr>';
                     $c=0;
                     while($row=mysqli_fetch_array($q) )
                     {
@@ -100,12 +100,11 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                         $t=$row['title'];
                         $s=$row['status'];
                         $c++;
-                        echo '<tr><td style="color:#1791b1"><center><b>'.$c.'</b></center></td><td><center>'.$t.'</center></td><td><center><a href="admin_dash.php?approve='.$q_id.'">Approve</a></center></td></td><td><center> <a href="admin_dash.php?unapprove='.$q_id.'">Un Approve</a></center></td><td><center> <a href="admin_dash.php?delete='.$q_id.'">Delete Exam</a></center></td>';
+                        echo '<tr><td style="color:#1791b1"><center><b>'.$c.'</b></center></td><td><center>'.$t.'</center></td><td><center><a href="admin_dash.php?approve='.$q_id.'" class="btn btn-info">Approve</a></center></td></td>
+                        
+                        <td><center> <a href="admin_dash.php?unapprove='.$q_id.'" class="btn btn-danger">Un Approve</a></center></td>';
                     }
                     echo '</table></div></div>';
-                
-                   
-
                 }
 
                 if (@$_GET['q'] == 2) {
@@ -131,8 +130,6 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                             while ($row = mysqli_fetch_array($q13)) {
                                 $prof_name=$row['name'];
                             }
-
-
                             
                         }
                         $c++;
@@ -163,6 +160,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                 }
 
                 ?>
+<!--professor edit-->
                 <?php
                 if (@$_GET['q'] == 20) {
                     $result = mysqli_query($con, "SELECT * FROM `prof`") or die('Error');
@@ -176,7 +174,7 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                         $email = $row['email'];
                         $c++;
                         
-                        echo '<tr><td><center>' . $c . '</center></td><td><center>' . $name . '</center></td><td><center>' . $email . '</center></td><td><center><a title="Delete User" href="update.php?demail=' . $email . '"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></center></td></tr>';
+                        echo '<tr><td><center>' . $c . '</center></td><td><center>' . $name . '</center></td><td><center>' . $email . '</center></td><td><center><a title="Delete User" href="update.php?professor"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></center></td></tr>';
                     }
 
                     echo '</table></div></div>';
@@ -215,94 +213,90 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
                 }
                 ?>
 
-                <?php
-                if (@$_GET['q'] == 10) {
+<!--add subject-->
+<?php
+    if (@$_GET['q'] == 10) {
                     
-                    echo '<div class="row"><span class="title1" style="margin-left:40%;font-size:30px;color:#fff;"><b>Add Subject</b></span><br /><br />
-                        <div class="col-md-3"></div><div class="col-md-6">   
-                        <form class="form-horizontal title1" name="form" action="update.php?q=addsub"  method="POST">
-                            <fieldset>
+        echo '<div class="row"><span class="title1" style="margin-left:40%;font-size:30px;color:#fff;"><b>Add Subject</b></span><br /><br />
+            <div class="col-md-3"></div><div class="col-md-6">   
+            <form class="form-horizontal title1" name="form" action="update.php?q=addsub"  method="POST">
+                 <fieldset>
 
-                            <div class="form-group">
-                            <label class="col-md-12 control-label" for="name"></label>  
-                            <div class="col-md-12">';
+                     <div class="form-group">
+                     <label class="col-md-12 control-label" for="name"></label>  
+                     <div class="col-md-12">';
                             
-                                echo'<select id="name" name="dep" placeholder="Enter Department title" class="form-control input-md" type="text">
-                                <option>Choose Department</option>';
-                                $q = mysqli_query($con, "SELECT * FROM dep");
-                                while ($row = mysqli_fetch_array($q)) {
-                                    $dep_id=$row['id'];
-                                    $title = $row['name'];
-                                    echo' <option value="'.$dep_id.'">'.$title.'</option>';
+                    echo'<select id="name" name="dep" placeholder="Enter Department title" class="form-control input-md" type="text">
+                    <option>Choose Department</option>';
+                     $q = mysqli_query($con, "SELECT * FROM dep");
+                         while ($row = mysqli_fetch_array($q)) {
+                            $dep_id=$row['id'];
+                            $title = $row['name'];
+                            echo' <option value="'.$dep_id.'">'.$title.'</option>';
                                 };
-                                echo '</select>';
-                            
-                            echo'</div>
-                        </div>
-
-
-                        <div class="form-group">
-                        <label class="col-md-12 control-label" for="name"></label>  
-                        <div class="col-md-12">';
-                        
-                            echo'<select id="name" name="prof" placeholder="Enter Department title" class="form-control input-md" type="text">
-                            <option>Choose Professor Name</option>';
-                            $q = mysqli_query($con, "SELECT * FROM prof ");
-                            while ($row = mysqli_fetch_array($q)) {
-                                $prof_id=$row['id'];
-                                $name = $row['name'];
-                                echo' <option value="'.$prof_id.'">'.$name.'</option>';
-                            };
                             echo '</select>';
+                            
+                    echo'</div>
+                </div>
+
+
+             <div class="form-group">
+            <label class="col-md-12 control-label" for="name"></label>  
+            <div class="col-md-12">';
                         
-                        echo'</div>
-                    </div>
+                echo'<select id="name" name="prof" placeholder="Enter Department title" class="form-control input-md" type="text">
+                <option>Choose Professor Name</option>';
+                $q = mysqli_query($con, "SELECT * FROM prof ");
+                while ($row = mysqli_fetch_array($q)) {
+                    $prof_id=$row['id'];
+                    $name = $row['name'];
+                    echo' <option value="'.$prof_id.'">'.$name.'</option>';
+                            };
+                    echo '</select>';
+                        
+                    echo'</div>
+            </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-12 control-label" for="name"></label>  
-                                    <div class="col-md-12">
-                                        <input id="name" name="name" placeholder="Enter subject title" class="form-control input-md" type="text">
-                                    </div>
-                                </div>
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="name"></label>  
+                <div class="col-md-12">
+                    <input id="name" name="name" placeholder="Enter subject title" class="form-control input-md" type="text">
+                </div>
+            </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-12 control-label" for="name"></label>  
-                                    <div class="col-md-12">
-                                        <input id="code" name="code" placeholder="Enter subject code" class="form-control input-md" type="text">
-                                    </div>
-                                </div>
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="name"></label>  
+                <div class="col-md-12">
+                    <input id="code" name="code" placeholder="Enter subject code" class="form-control input-md" type="text">
+                </div>
+            </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-12 control-label" for="name"></label>  
-                                    <div class="col-md-12">
-                                        <input id="level" name="level" placeholder="Enter subject Level" class="form-control input-md" type="text">
-                                    </div>
-                                </div>
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="name"></label>  
+                <div class="col-md-12">
+                    <input id="level" name="level" placeholder="Enter subject Level" class="form-control input-md" type="text">
+                </div>
+            </div>
 
-                                <div class="form-group">
-                                <label class="col-md-12 control-label" for="total"></label>  
-                                <div class="col-md-12">
-                                    <input id="total" name="hour" placeholder="Enter hour of subjects" class="form-control input-md" type="number">
-                                </div>
-                            </div>
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="total"></label>  
+                <div class="col-md-12">
+                    <input id="total" name="hour" placeholder="Enter hour of subjects" class="form-control input-md" type="number">
+                </div>
+            </div>
 
                                 
-                                <div class="form-group">
-                                    <label class="col-md-12 control-label" for=""></label>
-                                    <div class="col-md-12"> 
-                                        <input  type="submit" name="addsub" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
-                                    </div>
-                                </div>
+            <div class="form-group">
+                <label class="col-md-12 control-label" for=""></label>
+                <div class="col-md-12"> 
+                    <input  type="submit" name="addsub" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+                </div>
+            </div>
 
-                            </fieldset>
-                        </form></div>';
-                }
-                ?>
-
-
-
-
-
+                </fieldset>
+        </form></div>';
+    }
+?>
 
 <!--feedback start-->
 <?php if(@$_GET['q']==3) {
